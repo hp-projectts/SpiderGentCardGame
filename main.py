@@ -10,8 +10,16 @@ characters = [
     {"name": "Dr Ignatius Eel",
      "power": 80},
     {"name": "Baron the Hunter",
-     "power": 75}
+     "power": 75},
+    {"name": "The Buzzard",
+     "power": 66},
+    {"name": "Plague",
+     "power": 91},
+    {"name": "Enigmo",
+     "power" : 70}   
 ]
+
+#CARD ALLOCATION
 player_card = random.choice(characters)
 computer_card = random.choice(characters)
 
