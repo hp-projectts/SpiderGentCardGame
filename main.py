@@ -1,5 +1,5 @@
 #COMIC BOOK INSPIRED CARD GAME W/ GOTHIC AESTHETIC
-
+import random
 #CHARACTER LIST
 characters = [
     {"name": "Spider-Gent",
@@ -11,5 +11,15 @@ characters = [
     {"name": "Baron the Hunter",
      "power": 75}
 ]
+player_card = random.choice(characters)
+computer_card = random.choice(characters)
 
-print(characters[1])
+print("Your card:")
+print(player_card["name"])
+print("Power", player_card["power"])
+
+print()
+
+print("Computer card:")
+print(computer_card["name"])
+print("Power", computer_card["power"])
