@@ -1,5 +1,6 @@
 #COMIC BOOK INSPIRED CARD GAME W/ GOTHIC AESTHETIC
 import random
+from battle import battle_cards
 #CHARACTER LIST
 characters = [
     {"name": "Spider-Gent",
@@ -23,3 +24,7 @@ print()
 print("Computer card:")
 print(computer_card["name"])
 print("Power", computer_card["power"])
+
+print()
+
+battle_cards(player_card, computer_card)
