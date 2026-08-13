@@ -6,7 +6,7 @@
     {"name": "Percival Parkinson",
      "power": 19,
      "speed": 15,
-     "intelligence": 82}
+     "intelligence": 82},
     {"name": "Dr Ignatius Eel",
      "power": 80,
      "speed": 65,
@@ -22,7 +22,7 @@
     {"name": "Plague",
      "power": 91,
      "speed": 88,
-     "intelligence":39},
+     "intelligence":31},
     {"name": "Madame Mystery",
      "power" : 70,
      "speed": 65,

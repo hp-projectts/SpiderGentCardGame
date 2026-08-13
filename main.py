@@ -9,9 +9,12 @@ player_card = choose_card(characters)
 computer_card = choose_card(characters)  #randomly assigns player/computer card using choose card function
 
 show_card(player_card, "Your")
+chosen_stat = input("Choose a stat (power, speed, intelligence): ")
+print()
 show_card(computer_card, "Computer")
+print()
 
-battle_cards(player_card, computer_card)
+battle_cards(player_card, computer_card, chosen_stat)
 
 
 
