@@ -1,23 +1,22 @@
 import json
 import random
 
-#importing characters from json
 
-def load_characters():
+def load_characters(): #importing characters from json
     with open("characters.json", "r") as file:
         characters = json.load(file)
     return characters
 
-#random card selection
 
-def choose_card(characters):
+def choose_card(characters): #random card selection
     card = random.choice(characters)
     return card
 
-#displays who has card + info
 
-def show_card(card, owner):
+def show_card(card, owner): #displays who has card + info
     print(owner + " card:")  
     print(card["name"])
     print("Power:", card["power"])
+    print("Speed", card["speed"])
+    print("Intelligence:", card["intelligence"])
     print()  

@@ -1,38 +1,21 @@
 #COMIC BOOK INSPIRED CARD GAME W/ GOTHIC AESTHETIC
-import random
+from card import load_characters, choose_card, show_card
 from battle import battle_cards
-#CHARACTER LIST
-characters = [
-    {"name": "Spider-Gent",
-     "power": 88},
-    {"name": "Percival Parkinson",
-     "power": 19},
-    {"name": "Dr Ignatius Eel",
-     "power": 80},
-    {"name": "Baron the Hunter",
-     "power": 75},
-    {"name": "The Buzzard",
-     "power": 66},
-    {"name": "Plague",
-     "power": 91},
-    {"name": "Enigmo",
-     "power" : 70}   
-]
 
-#CARD ALLOCATION
-player_card = random.choice(characters)
-computer_card = random.choice(characters)
 
-print("Your card:")
-print(player_card["name"])
-print("Power", player_card["power"])
+characters = load_characters() #run load_characters function from card.py and assigns characters to variable 
 
-print()
+player_card = choose_card(characters)
+computer_card = choose_card(characters)  #randomly assigns player/computer card using choose card function
 
-print("Computer card:")
-print(computer_card["name"])
-print("Power", computer_card["power"])
-
-print()
+show_card(player_card, "Your")
+show_card(computer_card, "Computer")
 
 battle_cards(player_card, computer_card)
+
+
+
+
+
+
+
