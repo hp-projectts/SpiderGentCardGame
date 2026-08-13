@@ -12,7 +12,10 @@ def battle_cards(player_card, computer_card, stat):
 
     if player_value > computer_value:
         print("You win!")
+        return "player"
     elif player_value < computer_value:
         print("Computer wins...")
+        return "computer"
     else:
-        print("It's a draw...")        
+        print("It's a draw...")   
+        return "draw"     

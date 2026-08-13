@@ -2,6 +2,8 @@
 from card import load_characters, choose_card, show_card
 from battle import battle_cards
 
+player_score = 0
+computer_score = 0
 
 characters = load_characters() #run load_characters function from card.py and assigns characters to variable 
 
@@ -21,9 +23,16 @@ while chosen_stat not in valid_stats:
 print()
 show_card(computer_card, "Computer")
 
-battle_cards(player_card, computer_card, chosen_stat)
+winner = battle_cards(player_card, computer_card, chosen_stat)
 
+if winner == "player":
+    player_score += 1
+elif winner == "computer":
+    computer_score += 1
 
+print("Score")
+print(f"Player: {player_score}")
+print(f"Computer: {computer_score}")        
 
 
 
