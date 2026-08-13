@@ -6,13 +6,20 @@ from battle import battle_cards
 characters = load_characters() #run load_characters function from card.py and assigns characters to variable 
 
 player_card = choose_card(characters)
+characters.remove(player_card)
 computer_card = choose_card(characters)  #randomly assigns player/computer card using choose card function
 
 show_card(player_card, "Your")
-chosen_stat = input("Choose a stat (power, speed, intelligence): ")
+
+valid_stats = ["power","speed", "intelligence"]
+
+chosen_stat = input("Choose a stat (power, speed, intelligence): ").lower()
+
+while chosen_stat not in valid_stats:
+    print("Invalid stat")
+    chosen_stat = input("Choose again:").lower()
 print()
 show_card(computer_card, "Computer")
-print()
 
 battle_cards(player_card, computer_card, chosen_stat)
 

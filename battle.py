@@ -8,6 +8,7 @@ def battle_cards(player_card, computer_card, stat):
     print("Battle stat:", stat)
     print("Your value", player_value)
     print("Computer value", computer_value)
+    print()
 
     if player_value > computer_value:
         print("You win!")
