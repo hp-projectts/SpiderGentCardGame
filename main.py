@@ -41,7 +41,12 @@ while player_score < 5 and computer_score < 5:
 
     round_number += 1     
 
+print("\nGame over!")
 
+if player_score > computer_score:
+    print("You Win!")
+else:
+    print("You lose this time...")    
 
 
 
