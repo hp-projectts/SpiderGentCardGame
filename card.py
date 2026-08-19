@@ -19,4 +19,6 @@ def show_card(card, owner): #displays who has card + info
     print("Power:", card["power"])
     print("Speed", card["speed"])
     print("Intelligence:", card["intelligence"])
+    print(f"Info: {card["info"]}")
+    print(f"Image: {card["image"]}")
     print()  

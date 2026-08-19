@@ -1,5 +1,5 @@
 [
-    {"name": "Spider-Gent",
+    {"name": "Mr Arachnid",
      "power": 88,
      "speed": 95,
      "intelligence": 82,
@@ -10,7 +10,7 @@
      "speed": 15,
      "intelligence": 82,
      "info": "A smart and spectacled photographic operator for the Daily Bristol, but is there more to this chap than meets the eye?",
-     "image": "images/percical_parker.png"},
+     "image": "images/percival_parkinson.png"},
     {"name": "Dr Ignatius Eel",
      "power": 80,
      "speed": 65,
@@ -27,8 +27,8 @@
      "power": 66,
      "speed": 78,
      "intelligence": 71,
-     "info": "After stealing some blueprints for a flying device from a man named Leonardo, The Buzzard uses his contraption to rob banks from New Bristol to Oldport",
-     "image": "images/the_buzzard.png",}
+     "info": "After stealing some blueprints for a flying device from some archives in Roma, The Buzzard uses his contraption to rob banks from New Bristol to Oldport",
+     "image": "images/the_buzzard.png"},
     {"name": "Plague",
      "power": 91,
      "speed": 88,

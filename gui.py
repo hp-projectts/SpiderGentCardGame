@@ -1,0 +1,102 @@
+import tkinter as tk
+from card import load_characters, choose_card
+
+characters = load_characters()
+
+player_card = choose_card(characters)
+
+
+
+window = tk.Tk()
+
+window.title("Spider-Gent: A Card Game")
+window.geometry("800x600")
+
+title_label = tk.Label(window, text="Spider-Gent and the nefarious criminals of New Bristol")
+title_label.pack()
+
+card_image = tk.PhotoImage(
+    file=player_card["image"]
+)
+card_image = card_image.subsample(3.5, 3.5)
+print(card_image.width())
+print(card_image.height())
+
+card_frame = tk.Frame(
+    window,
+    bg="#e8e0d0",
+    bd=3,
+    relief="solid",
+    padx=20,
+    pady=20
+)
+
+card_frame.pack(pady=20)
+
+card_name_label = tk.Label(
+    card_frame, 
+    text=player_card["name"], 
+    font=("Arial", 20, "bold"),
+    bg="#e8e0d0"
+    )
+card_name_label.pack()
+
+content_frame = tk.Frame(
+    card_frame,
+    bg="#e8e0d0"
+)
+content_frame.pack(pady=10)
+
+image_frame = tk.Frame(
+    content_frame,
+    bg="#e8e0d0"
+)
+image_frame.pack(side="left",padx=10)
+
+stats_frame = tk.Frame(
+    content_frame,
+    bg="#e8e0d0"
+)
+stats_frame.pack(side="right", padx=10)
+
+image_label= tk.Label(
+    image_frame,
+    image=card_image
+)
+
+image_label.pack(pady=10)
+
+power_label = tk.Label(
+    stats_frame, 
+    text=f"Power: {player_card['power']}",
+    font=("Ariel", 10, "bold"),
+    bg="#e8e0d0"
+    )
+power_label.pack(anchor="w")
+
+speed_label = tk.Label(
+    stats_frame, 
+    text=f"Speed: {player_card['speed']}",
+    font=("Ariel", 10, "bold"),
+    bg="#e8e0d0"
+    )
+speed_label.pack(anchor="w")
+
+intelligence_label = tk.Label(
+    stats_frame, 
+    text=f"Intelligence: {player_card['intelligence']}",
+    font=("Ariel", 10, "bold"),
+    bg="#e8e0d0"
+    )
+intelligence_label.pack(anchor="w")
+
+info_label = tk.Label(
+    stats_frame, 
+    text=player_card["info"],
+    font=("Ariel", 6, "italic"),
+    bg="#e8e0d0"
+    )
+info_label.pack()
+
+
+window.mainloop()
