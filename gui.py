@@ -18,7 +18,7 @@ title_label.pack()
 card_image = tk.PhotoImage(
     file=player_card["image"]
 )
-card_image = card_image.subsample(3.5, 3.5)
+card_image = card_image.subsample(3, 3)
 print(card_image.width())
 print(card_image.height())
 
@@ -98,5 +98,14 @@ info_label = tk.Label(
     )
 info_label.pack()
 
+def deal_new_card():
+    print("Button clicked!")
+
+deal_button = tk.BUtton(
+    window,
+    text="Deal New Card",
+    command=deal_new_card
+)  
+deal_button.pack(pady=10)  
 
 window.mainloop()
