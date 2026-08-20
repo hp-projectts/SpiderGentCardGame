@@ -19,11 +19,12 @@ card_image = tk.PhotoImage(
     file=player_card["image"]
 )
 card_image = card_image.subsample(4, 4)
-print(card_image.width())
-print(card_image.height())
 
-card_frame = tk.Frame(
-    window,
+cards_container = tk.Frame(window)
+cards_container.pack()
+
+player_card_frame = tk.Frame(
+    cards_container,
     bg="#e8e0d0",
     bd=3,
     relief="solid",
@@ -31,18 +32,69 @@ card_frame = tk.Frame(
     pady=20
 )
 
-card_frame.pack(pady=20)
+player_card_frame.pack(
+    side="left",
+    padx=20
+)
 
+computer_card_frame = tk.Frame(
+    cards_container,
+    bg="#d3d3d3",
+    bd=3,
+    relief="solid",
+    padx=20,
+    pady=20
+)
+
+computer_card_frame.pack(
+    side="left",
+    padx=20
+)
+
+computer_title_label = tk.Label(
+    computer_card_frame,
+    text="Computer Card",
+    font=("Ariel", 10, "bold"),
+    bg="#d3d3d3"
+)
+computer_title_label.pack()
 card_name_label = tk.Label(
-    card_frame, 
+    player_card_frame, 
     text=player_card["name"], 
     font=("Arial", 20, "bold"),
     bg="#e8e0d0"
     )
 card_name_label.pack()
 
+computer_image_label = tk.Label (
+    computer_card_frame,
+    text="[HIDDEN]",
+    width=25,
+    height=8,
+    relief="solid"
+)
+computer_image_label.pack(pady=10)
+
+computer_power_label = tk.Label(
+    computer_card_frame,
+    text="Power: ???",
+    bg="#d3d3d3"
+)
+
+computer_speed_label = tk.Label(
+    computer_card_frame,
+    text="Speed: ???",
+    bg="#d3d3d3"
+)
+
+computer_intelligence_label = tk.Label(
+    computer_card_frame,
+    text="Intelligence = ???",
+    bg="#d3d3d3"
+)
+
 content_frame = tk.Frame(
-    card_frame,
+    player_card_frame,
     bg="#e8e0d0"
 )
 content_frame.pack(pady=10)
@@ -98,33 +150,43 @@ info_label = tk.Label(
     )
 info_label.pack()
 
+display_card(player_card)
+
 def deal_new_card():
 
     new_card = choose_card(characters)
-    new_image = tk.PhotoImage(
-        file=new_card["image"]
-    )
-    new_image = new_image.subsample(4, 4)
+    display_card(new_card)
+    
 
-    image_label.config(
-        image=new_image
-    )
-    image_label.image = new_image
+   
+    
+    
+
+def display_card(card):
     card_name_label.config(
         text=new_card["name"]
-    )
+        )
     info_label.config(
         text=new_card["info"]
-    )
+        )
     power_label.config(
         text=f"Power: {new_card['power']}"
-    )
+        )
     speed_label.config(
         text=f"Speed: {new_card['speed']}"
-    )
+        )
     intelligence_label.config(
         text=f"Intelligence: {new_card["intelligence"]}"
-    )
+        )
+    new_image = tk.PhotoImage(
+        file=new_card["image"]
+        )
+    new_image = new_image.subsample(4, 4)
+    
+    image_label.config(
+        image=new_image
+        )
+    image_label.image = new_image #this keeps the image in memory
 
 deal_button = tk.Button(
     window,
