@@ -18,7 +18,7 @@ title_label.pack()
 card_image = tk.PhotoImage(
     file=player_card["image"]
 )
-card_image = card_image.subsample(3, 3)
+card_image = card_image.subsample(4, 4)
 print(card_image.width())
 print(card_image.height())
 
@@ -99,9 +99,34 @@ info_label = tk.Label(
 info_label.pack()
 
 def deal_new_card():
-    print("Button clicked!")
 
-deal_button = tk.BUtton(
+    new_card = choose_card(characters)
+    new_image = tk.PhotoImage(
+        file=new_card["image"]
+    )
+    new_image = new_image.subsample(4, 4)
+
+    image_label.config(
+        image=new_image
+    )
+    image_label.image = new_image
+    card_name_label.config(
+        text=new_card["name"]
+    )
+    info_label.config(
+        text=new_card["info"]
+    )
+    power_label.config(
+        text=f"Power: {new_card['power']}"
+    )
+    speed_label.config(
+        text=f"Speed: {new_card['speed']}"
+    )
+    intelligence_label.config(
+        text=f"Intelligence: {new_card["intelligence"]}"
+    )
+
+deal_button = tk.Button(
     window,
     text="Deal New Card",
     command=deal_new_card
