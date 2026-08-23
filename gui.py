@@ -11,7 +11,7 @@ player_card = choose_card(characters)
 window = tk.Tk()
 
 window.title("Spider-Gent: A Card Game")
-window.geometry("800x600")
+window.geometry("1200x700")
 
 #TITLE
 
@@ -30,8 +30,8 @@ player_card_frame = tk.Frame(
     bg="#e8e0d0",
     bd=3,
     relief="solid",
-    padx=20,
-    pady=20
+    width=670,
+    height=550,
 )
 
 player_card_frame.pack(
@@ -39,25 +39,24 @@ player_card_frame.pack(
     padx=20
 )
 
-card_name_label = tk.Label(
-    player_card_frame, 
-    text=player_card["name"], 
-    font=("Arial", 20, "bold"),
-    bg="#e8e0d0"
-    )
-card_name_label.pack()
+player_card_frame.pack_propagate(False)
 
 #This frame holds images and stats side by side
 content_frame = tk.Frame(
     player_card_frame,
-    bg="#e8e0d0"
+    bg="#e8e0d0",
 )
-content_frame.pack(pady=10)
+content_frame.pack(
+    fill="both",
+    expand=True,
+    padx=10,
+    pady=10)
+
 
 #Player image area
 image_frame = tk.Frame(
     content_frame,
-    bg="#e8e0d0"
+    bg="#e8e0d0",
 )
 image_frame.pack(
     side="left",
@@ -66,13 +65,15 @@ image_frame.pack(
 card_image = tk.PhotoImage(
     file=player_card["image"]
 )
-card_image = card_image.subsample(4, 4)
+
+card_image = card_image.subsample(3, 3)
+
 image_label= tk.Label(
     image_frame,
     image=card_image
 )
 
-image_label.pack(pady=10)
+image_label.pack()
 
 #Player stats area
 stats_frame = tk.Frame(
@@ -80,13 +81,27 @@ stats_frame = tk.Frame(
     bg="#e8e0d0"
 )
 stats_frame.pack(
-    side="right", 
+    side="right",
+    fill="both",
+    expand=True, 
     padx=10
 )
+
+card_name_label = tk.Label(
+    stats_frame, 
+    text=player_card["name"], 
+    font=("Arial", 20, "bold"),
+    bg="#e8e0d0"
+    )
+card_name_label.pack(
+    anchor="n",
+    pady=(30, 120)
+)
+
 power_label = tk.Label(
     stats_frame, 
     text=f"Power: {player_card['power']}",
-    font=("Arial", 10, "bold"),
+    font=("Arial", 20, "bold"),
     bg="#e8e0d0"
     )
 power_label.pack(anchor="w")
@@ -94,7 +109,7 @@ power_label.pack(anchor="w")
 speed_label = tk.Label(
     stats_frame, 
     text=f"Speed: {player_card['speed']}",
-    font=("Arial", 10, "bold"),
+    font=("Arial", 20, "bold"),
     bg="#e8e0d0"
     )
 speed_label.pack(anchor="w")
@@ -102,7 +117,7 @@ speed_label.pack(anchor="w")
 intelligence_label = tk.Label(
     stats_frame, 
     text=f"Intelligence: {player_card['intelligence']}",
-    font=("Arial", 10, "bold"),
+    font=("Arial", 20, "bold"),
     bg="#e8e0d0"
     )
 intelligence_label.pack(anchor="w")
@@ -112,12 +127,12 @@ intelligence_label.pack(anchor="w")
 info_label = tk.Label(
     stats_frame, 
     text=player_card["info"],
-    font=("Arial", 6, "italic"),
+    font=("Arial", 12, "italic"),
     bg="#e8e0d0",
-    wraplength=350,
+    wraplength=250,
     justify="center"
     )
-info_label.pack()
+info_label.pack(pady=(30, 0))
 
 
 
@@ -226,7 +241,7 @@ def display_card(card):
     new_image = tk.PhotoImage(
         file=card["image"]
         )
-    new_image = new_image.subsample(4, 4)
+    new_image = new_image.subsample(3, 3)
     
     image_label.config(
         image=new_image
