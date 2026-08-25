@@ -10,18 +10,15 @@ player_card = choose_card(characters)
 
 window = tk.Tk()
 
-window.title("Spider-Gent: A Card Game")
+window.title("Mr Arachnid & the Fiends of New Bristol: A Card Game")
 window.geometry("1200x700")
-
-#TITLE
-
-title_label = tk.Label(window, text="Spider-Gent and the nefarious criminals of New Bristol")
-title_label.pack()
 
 #CARDS CONTAINER
 
 cards_container = tk.Frame(window)
-cards_container.pack()
+cards_container.pack(
+    pady=20
+)
 
 #PLAYER CARD
 
@@ -30,13 +27,13 @@ player_card_frame = tk.Frame(
     bg="#e8e0d0",
     bd=3,
     relief="solid",
-    width=670,
+    width=600,
     height=550,
 )
 
 player_card_frame.pack(
     side="left",
-    padx=20
+    padx=10
 )
 
 player_card_frame.pack_propagate(False)
@@ -49,7 +46,7 @@ content_frame = tk.Frame(
 content_frame.pack(
     fill="both",
     expand=True,
-    padx=10,
+    padx=5,
     pady=10)
 
 
@@ -60,7 +57,7 @@ image_frame = tk.Frame(
 )
 image_frame.pack(
     side="left",
-    padx=10
+    padx=5
 )
 card_image = tk.PhotoImage(
     file=player_card["image"]
@@ -90,7 +87,7 @@ stats_frame.pack(
 card_name_label = tk.Label(
     stats_frame, 
     text=player_card["name"], 
-    font=("Arial", 20, "bold"),
+    font=("Arial", 16, "bold"),
     bg="#e8e0d0"
     )
 card_name_label.pack(
@@ -101,7 +98,7 @@ card_name_label.pack(
 power_label = tk.Label(
     stats_frame, 
     text=f"Power: {player_card['power']}",
-    font=("Arial", 20, "bold"),
+    font=("Arial", 16, "bold"),
     bg="#e8e0d0"
     )
 power_label.pack(anchor="w")
@@ -109,7 +106,7 @@ power_label.pack(anchor="w")
 speed_label = tk.Label(
     stats_frame, 
     text=f"Speed: {player_card['speed']}",
-    font=("Arial", 20, "bold"),
+    font=("Arial", 16, "bold"),
     bg="#e8e0d0"
     )
 speed_label.pack(anchor="w")
@@ -117,7 +114,7 @@ speed_label.pack(anchor="w")
 intelligence_label = tk.Label(
     stats_frame, 
     text=f"Intelligence: {player_card['intelligence']}",
-    font=("Arial", 20, "bold"),
+    font=("Arial", 16, "bold"),
     bg="#e8e0d0"
     )
 intelligence_label.pack(anchor="w")
@@ -127,9 +124,9 @@ intelligence_label.pack(anchor="w")
 info_label = tk.Label(
     stats_frame, 
     text=player_card["info"],
-    font=("Arial", 12, "italic"),
+    font=("Arial", 8, "italic"),
     bg="#e8e0d0",
-    wraplength=250,
+    wraplength=200,
     justify="center"
     )
 info_label.pack(pady=(30, 0))
@@ -150,53 +147,109 @@ computer_card_frame = tk.Frame(
     bg="#d3d3d3",
     bd=3,
     relief="solid",
-    padx=20,
-    pady=20
+    width=670,
+    height=550,
 )
 
 computer_card_frame.pack(
     side="left",
-    padx=20
+    padx=10
 )
 
-computer_title_label = tk.Label(
+computer_card_frame.pack_propagate(False)
+
+#This frame holds images and stats side by side
+computer_content_frame = tk.Frame(
     computer_card_frame,
-    text="Computer Card",
-    font=("Ariel", 10, "bold"),
-    bg="#d3d3d3"
+    bg="#d3d3d3",
 )
-computer_title_label.pack()
+computer_content_frame.pack(
+    fill="both",
+    expand=True,
+    padx=5,
+    pady=10
+    )
 
+#Computer image area
+
+computer_image_frame = tk.Frame(
+    computer_content_frame,
+    bg="#d3d3d3",
+)
+computer_image_frame.pack(
+    side="left",
+    padx=5
+)
 
 computer_image_label = tk.Label (
-    computer_card_frame,
+    computer_image_frame,
     text="[HIDDEN]",
-    width=25,
-    height=8,
-    relief="solid"
+    font=("Arial", 20),
+    width=18,
+    height=35,
+    relief="solid",
 )
 computer_image_label.pack(pady=10)
 
+#Computer stats area
+
+computer_stats_frame = tk.Frame(
+    computer_content_frame,
+    bg="#d3d3d3"
+)
+computer_stats_frame.pack(
+    side="right",
+    fill="both",
+    expand=True, 
+    padx=10
+)
+
+computer_title_label = tk.Label(
+    computer_stats_frame,
+    text="Computer Card",
+    font=("Ariel", 18, "bold"),
+    bg="#d3d3d3"
+)
+computer_title_label.pack(
+    anchor="n",
+    pady=(30, 120)
+)
+
 computer_power_label = tk.Label(
-    computer_card_frame,
+    computer_stats_frame,
     text="Power: ???",
+    font=("Arial", 16, "bold"),
     bg="#d3d3d3"
 )
 computer_power_label.pack(anchor="w")
 
 computer_speed_label = tk.Label(
-    computer_card_frame,
+    computer_stats_frame,
     text="Speed: ???",
+    font=("Arial", 16, "bold"),
     bg="#d3d3d3"
 )
 computer_speed_label.pack(anchor="w")
 
 computer_intelligence_label = tk.Label(
-    computer_card_frame,
+    computer_stats_frame,
     text="Intelligence = ???",
+    font=("Arial", 16, "bold"),
     bg="#d3d3d3"
 )
 computer_intelligence_label.pack(anchor="w")
+
+#Computer card info
+
+computer_info_label = tk.Label(
+    computer_stats_frame, 
+    text="????????????????????????????????????????????????????????",
+    font=("Arial", 8, "italic"),
+    bg="#d3d3d3",
+    wraplength=200,
+    justify="center"
+    )
+computer_info_label.pack(pady=(30, 0))
 
 # FUNCTIONS 
 
