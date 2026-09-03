@@ -8,6 +8,99 @@ characters = load_characters()
 player_card = choose_card(characters)
 computer_card = choose_card(characters)
 
+# FUNCTIONS 
+
+def compare_stat(stat):
+    reveal_computer_card(computer_card)
+
+    result = battle_cards(
+        player_card,
+        computer_card,
+        stat
+    )
+
+    if result == "player":
+        instruction_result_label.config(
+            text="You win!!!"
+        )
+    elif result == "computer":
+        instruction_result_label.config(
+            text="Computer wins... Better luck next time!"
+        ) 
+    else:
+        instruction_result_label.config(
+            text="It's a draw"
+        )  
+
+def deal_new_card():
+
+    global player_card
+    global computer_card
+
+    player_card = choose_card(characters)
+    computer_card = choose_card(characters) 
+
+    display_card(player_card)
+
+    instruction_result_label.config(
+        text="Choose your battle stat..."
+    )
+  
+
+def display_card(card):
+    card_name_label.config(
+        text=card["name"]
+        )
+    info_label.config(
+        text=card["info"]
+        )
+    power_label.config(
+        text=f"Power: {card['power']}"
+        )
+    speed_label.config(
+        text=f"Speed: {card['speed']}"
+        )
+    intelligence_label.config(
+        text=f"Intelligence: {card['intelligence']}"
+        )
+    new_image = tk.PhotoImage(
+        file=card["image"]
+        )
+    new_image = new_image.subsample(3, 3)
+    
+    image_label.config(
+        image=new_image
+        )
+    image_label.image = new_image #this keeps the image in memory
+
+def reveal_computer_card(card):
+    computer_title_label.config(
+        text=card["name"]
+    )
+    computer_power_label.config(
+        text=f"Power: {card['power']}"
+    )
+    computer_speed_label.config(
+        text=f"Speed: {card['speed']}"
+    )
+    computer_intelligence_label.config(
+        text=f"Intelligence: {card['intelligence']}"
+    )
+    computer_info_label.config(
+        text=card["info"]
+    )
+    new_computer_image = tk.PhotoImage(
+        file=card["image"]
+    )
+    new_computer_image = new_computer_image.subsample(3, 3)
+
+    computer_image_label.config(
+        image=new_computer_image
+    )
+    computer_image_label.image = new_computer_image #will keep image in memory
+
+
+
 # CREATE MAIN WINDOW
 
 window = tk.Tk()
@@ -114,19 +207,21 @@ power_label = tk.Button(
     )
 power_label.pack(anchor="w")
 
-speed_label = tk.Label(
+speed_label = tk.Button(
     stats_frame, 
     text=f"Speed: {player_card['speed']}",
     font=("Arial", 16, "bold"),
-    bg="#e8e0d0"
+    bg="#e8e0d0",
+    command=lambda: compare_stat("speed")
     )
 speed_label.pack(anchor="w")
 
-intelligence_label = tk.Label(
+intelligence_label = tk.Button(
     stats_frame, 
     text=f"Intelligence: {player_card['intelligence']}",
     font=("Arial", 16, "bold"),
-    bg="#e8e0d0"
+    bg="#e8e0d0",
+    command=lambda: compare_stat("intelligence")
     )
 intelligence_label.pack(anchor="w")
 
@@ -262,56 +357,6 @@ computer_info_label = tk.Label(
     )
 computer_info_label.pack(pady=(30, 0))
 
-# FUNCTIONS 
-
-#~~~~~~GO FROM HERE~~~~~~
-
-
-
-
-
-
-
-
-
-
-
-
-def deal_new_card():
-
-    new_card = choose_card(characters)
-    display_card(new_card)
-
-   
-    
-    
-
-def display_card(card):
-    card_name_label.config(
-        text=card["name"]
-        )
-    info_label.config(
-        text=card["info"]
-        )
-    power_label.config(
-        text=f"Power: {card['power']}"
-        )
-    speed_label.config(
-        text=f"Speed: {card['speed']}"
-        )
-    intelligence_label.config(
-        text=f"Intelligence: {card['intelligence']}"
-        )
-    new_image = tk.PhotoImage(
-        file=card["image"]
-        )
-    new_image = new_image.subsample(3, 3)
-    
-    image_label.config(
-        image=new_image
-        )
-    image_label.image = new_image #this keeps the image in memory
-
 display_card(player_card)
 
 deal_button = tk.Button(
@@ -319,54 +364,6 @@ deal_button = tk.Button(
     text="Deal New Card",
     command=deal_new_card
 )  
-deal_button.pack(pady=10)  
-
-def reveal_computer_card(card):
-    computer_title_label.config(
-        text=card["name"]
-    )
-    computer_power_label.config(
-        text=f"Power: {card['power']}"
-    )
-    computer_speed_label.config(
-        text=f"Speed: {card['speed']}"
-    )
-    computer_intelligence_label.config(
-        text=f"Intelligence: {card['intelligence']}"
-    )
-    computer_info_label.config(
-        text=card["info"]
-    )
-    new_computer_image = tk.PhotoImage(
-        file=card["image"]
-    )
-    new_computer_image = new_computer_image.subsample(3, 3)
-
-    computer_image_label.config(
-        image=new_computer_image
-    )
-    computer_image_label.image = new_computer_image #will keep image in memory
-
-def compare_stat():
-    reveal_computer_card(computer_card)
-
-    result = battle_cards(
-        player_card,
-        computer_card,
-        stat
-    )
-
-    if result == "player":
-        instruction_result_label.config(
-            text="You win!!!"
-        )
-    elif result == "computer":
-        instruction_result_label.config(
-            text="Computer wins... Better luck next time!"
-        ) 
-    else:
-        instruction_result_label.config(
-            text="It's a draw"
-        )       
+deal_button.pack(pady=10)       
 
 window.mainloop()
