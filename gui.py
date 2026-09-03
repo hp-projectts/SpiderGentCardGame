@@ -1,5 +1,6 @@
 import tkinter as tk
 from card import load_characters, choose_card
+from battle import battle_cards
 
 #LOAD GAME DATA
 
@@ -108,7 +109,8 @@ power_label = tk.Button(
     stats_frame, 
     text=f"Power: {player_card['power']}",
     font=("Arial", 16, "bold"),
-    bg="#e8e0d0"
+    bg="#e8e0d0",
+    command=lambda: compare_stat("power")
     )
 power_label.pack(anchor="w")
 
@@ -344,5 +346,27 @@ def reveal_computer_card(card):
         image=new_computer_image
     )
     computer_image_label.image = new_computer_image #will keep image in memory
+
+def compare_stat():
+    reveal_computer_card(computer_card)
+
+    result = battle_cards(
+        player_card,
+        computer_card,
+        stat
+    )
+
+    if result == "player":
+        instruction_result_label.config(
+            text="You win!!!"
+        )
+    elif result == "computer":
+        instruction_result_label.config(
+            text="Computer wins... Better luck next time!"
+        ) 
+    else:
+        instruction_result_label.config(
+            text="It's a draw"
+        )       
 
 window.mainloop()
