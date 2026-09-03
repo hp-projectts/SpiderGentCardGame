@@ -5,6 +5,7 @@ from card import load_characters, choose_card
 
 characters = load_characters()
 player_card = choose_card(characters)
+computer_card = choose_card(characters)
 
 # CREATE MAIN WINDOW
 
@@ -19,6 +20,14 @@ cards_container = tk.Frame(window)
 cards_container.pack(
     pady=20
 )
+
+#Title label
+instruction_result_label = tk.Label(
+    cards_container,
+    text="Choose your battle stat...",
+    font=("Arial", 14, "bold")
+)
+instruction_result_label.pack()
 
 #PLAYER CARD
 
@@ -95,7 +104,7 @@ card_name_label.pack(
     pady=(30, 120)
 )
 
-power_label = tk.Label(
+power_label = tk.Button(
     stats_frame, 
     text=f"Power: {player_card['power']}",
     font=("Arial", 16, "bold"),
@@ -309,5 +318,31 @@ deal_button = tk.Button(
     command=deal_new_card
 )  
 deal_button.pack(pady=10)  
+
+def reveal_computer_card(card):
+    computer_title_label.config(
+        text=card["name"]
+    )
+    computer_power_label.config(
+        text=f"Power: {card['power']}"
+    )
+    computer_speed_label.config(
+        text=f"Speed: {card['speed']}"
+    )
+    computer_intelligence_label.config(
+        text=f"Intelligence: {card['intelligence']}"
+    )
+    computer_info_label.config(
+        text=card["info"]
+    )
+    new_computer_image = tk.PhotoImage(
+        file=card["image"]
+    )
+    new_computer_image = new_computer_image.subsample(3, 3)
+
+    computer_image_label.config(
+        image=new_computer_image
+    )
+    computer_image_label.image = new_computer_image #will keep image in memory
 
 window.mainloop()
