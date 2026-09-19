@@ -19,18 +19,7 @@ def compare_stat(stat):
         stat
     )
 
-    if result == "player":
-        instruction_result_label.config(
-            text="You win!!!"
-        )
-    elif result == "computer":
-        instruction_result_label.config(
-            text="Computer wins... Better luck next time!"
-        ) 
-    else:
-        instruction_result_label.config(
-            text="It's a draw"
-        )  
+    show_results_window(result, stat) 
 
 def deal_new_card():
 
@@ -117,6 +106,10 @@ def reveal_computer_card(card):
     )
     computer_image_label.image = new_computer_image #will keep image in memory
 
+def close_result_window_and_deal(result_window):
+    result_window.destroy()
+    deal_new_card()
+
 def show_results_window(result, stat):
     result_window = tk.Toplevel(window)
 
@@ -143,16 +136,16 @@ def show_results_window(result, stat):
         result_window,
         text=result_text,
         font=("Arial", 24, "bold"),
-        bg="#1a1714"
+        bg="#1a1714",
         fg="#d4af37"
     )    
-    result_label.pack(pady=20, 5))
+    result_label.pack(pady=(20, 5))
 
     stat_label = tk.Label(
         result_window,
         text=f"Battle stat: {stat.title()}",
         font=("Arial", 14),
-        bg="1a1714",
+        bg="#1a1714",
         fg="white"
     )
     stat_label.pack(pady=(0, 10))
@@ -161,7 +154,7 @@ def show_results_window(result, stat):
         result_window,
         text=winning_card["name"],
         font=("Arial", 18, "bold"),
-        bg="#1a1714"
+        bg="#1a1714",
         fg="white"
     )
     winner_name_label.pack(pady=5)
@@ -193,14 +186,14 @@ def show_results_window(result, stat):
         result_window,
         text="Deal New Card",
         font=("Arial", 14, "bold"),
-        command=lambda: close_result_and_deal(result_window)
+        command=lambda: close_result_window_and_deal(result_window)
     )
     deal_button.pack(pady=20)
 
     #if player closes window, start new round anyway
     result_window.protocol(
         "WM_DELETE_WINDOW",
-        lambda: close_result_and_deal(result_window)
+        lambda: close_result_window_and_deal(result_window)
     )
 
 # CREATE MAIN WINDOW
