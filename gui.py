@@ -19,7 +19,11 @@ def compare_stat(stat):
         stat
     )
 
-    show_results_window(result, stat) 
+    window.after(
+        2000,
+        lambda: show_results_window(result, stat)
+    )
+    
 
 def deal_new_card():
 
@@ -35,6 +39,10 @@ def deal_new_card():
         image=hidden_image
     )
     computer_image_label.image = hidden_image
+
+    computer_title_label.config(
+        text="???"
+    )
 
     computer_power_label.config(
         text="Power: ???"
@@ -73,7 +81,7 @@ def display_card(card):
     new_image = tk.PhotoImage(
         file=card["image"]
         )
-    new_image = new_image.subsample(3, 3)
+    new_image = new_image.subsample(2, 2)
     
     image_label.config(
         image=new_image
@@ -99,7 +107,7 @@ def reveal_computer_card(card):
     new_computer_image = tk.PhotoImage(
         file=card["image"]
     )
-    new_computer_image = new_computer_image.subsample(3, 3)
+    new_computer_image = new_computer_image.subsample(2, 2)
 
     computer_image_label.config(
         image=new_computer_image,
@@ -114,7 +122,7 @@ def show_results_window(result, stat):
     result_window = tk.Toplevel(window)
 
     result_window.title("Battle Result")
-    result_window.geometry("500x650")
+    result_window.geometry("1600x900")
     result_window.configure(bg="#1a1714")
 
     #This prevents player from clicking on main game when results window open
@@ -177,7 +185,7 @@ def show_results_window(result, stat):
         )
         winner_name = winning_card["name"] 
 
-    winning_image = winning_image.subsample(3, 3)    
+    winning_image = winning_image.subsample(2, 2)    
     
 
 
@@ -211,7 +219,11 @@ def show_results_window(result, stat):
         font=("Arial", 14, "bold"),
         command=lambda: close_result_window_and_deal(result_window)
     )
-    deal_button.pack(pady=20)
+    deal_button.place(
+        relx=0.5,
+        rely=0.85,
+        anchor="center"
+    )
 
     #if player closes window, start new round anyway
     result_window.protocol(
@@ -224,7 +236,7 @@ def show_results_window(result, stat):
 window = tk.Tk()
 
 window.title("Mr Arachnid & the Fiends of New Bristol: A Card Game")
-window.geometry("1200x700")
+window.geometry("1600x900")
 
 #CARDS CONTAINER
 
@@ -248,8 +260,8 @@ player_card_frame = tk.Frame(
     bg="#e8e0d0",
     bd=3,
     relief="solid",
-    width=600,
-    height=550,
+    width=750,
+    height=700,
 )
 
 player_card_frame.pack(
@@ -284,7 +296,7 @@ card_image = tk.PhotoImage(
     file=player_card["image"]
 )
 
-card_image = card_image.subsample(3, 3)
+card_image = card_image.subsample(2, 2)
 
 image_label= tk.Label(
     image_frame,
@@ -313,7 +325,7 @@ card_name_label = tk.Label(
     )
 card_name_label.pack(
     anchor="n",
-    pady=(30, 120)
+    pady=(20, 80)
 )
 
 power_label = tk.Button(
@@ -371,8 +383,8 @@ computer_card_frame = tk.Frame(
     bg="#d3d3d3",
     bd=3,
     relief="solid",
-    width=670,
-    height=550,
+    width=750,
+    height=700,
 )
 
 computer_card_frame.pack(
@@ -408,7 +420,7 @@ computer_image_frame.pack(
 hidden_image = tk.PhotoImage(
     file="images/card_back.png"
 )
-hidden_image = hidden_image.subsample(3, 3)
+hidden_image = hidden_image.subsample(2, 2)
 
 computer_image_label = tk.Label(
     computer_image_frame,
@@ -436,7 +448,7 @@ computer_stats_frame.pack(
 computer_title_label = tk.Label(
     computer_stats_frame,
     text="Computer Card",
-    font=("Ariel", 18, "bold"),
+    font=("Ariel", 14, "bold"),
     bg="#d3d3d3"
 )
 computer_title_label.pack(
@@ -480,13 +492,6 @@ computer_info_label = tk.Label(
     )
 computer_info_label.pack(pady=(30, 0))
 
-display_card(player_card)
-
-deal_button = tk.Button(
-    window,
-    text="Deal New Card",
-    command=deal_new_card
-)  
-deal_button.pack(pady=10)       
+display_card(player_card)     
 
 window.mainloop()
