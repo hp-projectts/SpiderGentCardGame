@@ -42,6 +42,24 @@ def deal_new_card():
 
     display_card(player_card)
 
+    computer_image_label.config(
+        image=hidden_image
+    )
+    computer_image_label.image = hidden_image
+
+    computer_power_label.config(
+        text="Power: ???"
+    )
+    computer_speed_label.config(
+        text="Speed: ???"
+    )
+    computer_intelligence_label.config(
+        text="Intelligence: ???"
+    )
+    computer_info_label.config(
+        text="????????????"
+    )
+
     instruction_result_label.config(
         text="Choose your battle stat..."
     )
@@ -95,7 +113,7 @@ def reveal_computer_card(card):
     new_computer_image = new_computer_image.subsample(3, 3)
 
     computer_image_label.config(
-        image=new_computer_image
+        image=new_computer_image,
     )
     computer_image_label.image = new_computer_image #will keep image in memory
 
@@ -287,15 +305,20 @@ computer_image_frame.pack(
     padx=5
 )
 
-computer_image_label = tk.Label (
+hidden_image = tk.PhotoImage(
+    file="images/card_back.png"
+)
+hidden_image = hidden_image.subsample(3, 3)
+
+computer_image_label = tk.Label(
     computer_image_frame,
-    text="[HIDDEN]",
-    font=("Arial", 20),
-    width=18,
-    height=35,
+    image=hidden_image,
     relief="solid",
 )
-computer_image_label.pack(pady=10)
+
+computer_image_label.image = hidden_image
+
+computer_image_label.pack()
 
 #Computer stats area
 
