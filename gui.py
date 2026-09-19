@@ -117,7 +117,91 @@ def reveal_computer_card(card):
     )
     computer_image_label.image = new_computer_image #will keep image in memory
 
+def show_results_window(result, stat):
+    result_window = tk.Toplevel(window)
 
+    result_window.title("Battle Result")
+    result_window.geometry("500x650")
+    result_window.configure(bg="#1a1714")
+
+    #This prevents player from clicking on main game when results window open
+    result_window.grab_set()
+
+    if result == "player":
+        result_text = "You win!"
+        winning_card = player_card
+
+    elif result == "computer":
+        result_text = "Computer wins... Better luck next time!"
+        winning_card = computer_card
+
+    else:
+        result_text = "It's a draw... Let's play again!"
+        #I want to but the placeholder card in if it is a draw
+
+    result_label = tk.Label(
+        result_window,
+        text=result_text,
+        font=("Arial", 24, "bold"),
+        bg="#1a1714"
+        fg="#d4af37"
+    )    
+    result_label.pack(pady=20, 5))
+
+    stat_label = tk.Label(
+        result_window,
+        text=f"Battle stat: {stat.title()}",
+        font=("Arial", 14),
+        bg="1a1714",
+        fg="white"
+    )
+    stat_label.pack(pady=(0, 10))
+
+    winner_name_label = tk.Label(
+        result_window,
+        text=winning_card["name"],
+        font=("Arial", 18, "bold"),
+        bg="#1a1714"
+        fg="white"
+    )
+    winner_name_label.pack(pady=5)
+
+    winning_image = tk.PhotoImage(
+        file=winning_card["image"]
+    )
+    winning_image = winning_image.subsample(3, 3)
+
+    winning_image_label = tk.Label(
+        result_window,
+        image=winning_image,
+        relief="solid",
+        bd=3
+    )
+    winning_image_label.image = winning_image
+    winning_image_label.pack(pady=10)
+
+    winning_value_label = tk.Label(
+        result_window,
+        text=f"{stat.title()}: {winning_card[stat]}",
+        font=("Arial", 16, "bold"),
+        bg="#1a1714",
+        fg="#d4af37"
+    )
+    winning_value_label.pack(pady=20)
+
+    deal_button = tk.Button(
+        result_window,
+        text="Deal New Card",
+        font=("Arial", 14, "bold"),
+        command=lambda: close_result_and_deal(result_window)
+    )
+    deal_button.pack(pady=20)
+
+    #if player closes window, start new round anyway
+    result_window.protocol(
+        "WM_DELETE_WINDOW",
+        lambda: close_result_and_deal(result_window)
+    )
 
 # CREATE MAIN WINDOW
 
