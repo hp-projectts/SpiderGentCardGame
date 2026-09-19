@@ -130,7 +130,7 @@ def show_results_window(result, stat):
 
     else:
         result_text = "It's a draw... Let's play again!"
-        #I want to but the placeholder card in if it is a draw
+        winning_card = None
 
     result_label = tk.Label(
         result_window,
@@ -150,19 +150,36 @@ def show_results_window(result, stat):
     )
     stat_label.pack(pady=(0, 10))
 
+    if winning_card is None:
+        winner_name = "DRAW"
+    else:
+        winner_name = winning_card["name"]    
+
     winner_name_label = tk.Label(
         result_window,
-        text=winning_card["name"],
+        text=winner_name,
         font=("Arial", 18, "bold"),
         bg="#1a1714",
         fg="white"
     )
     winner_name_label.pack(pady=5)
 
-    winning_image = tk.PhotoImage(
-        file=winning_card["image"]
-    )
-    winning_image = winning_image.subsample(3, 3)
+    if winning_card == None:
+
+        winning_image = tk.PhotoImage(
+            file="images/card_back.png"
+        )
+        winner_name = "No Winner"
+
+    else:   
+        winning_image = tk.PhotoImage(
+            file=winning_card["image"]
+        )
+        winner_name = winning_card["name"] 
+
+    winning_image = winning_image.subsample(3, 3)    
+    
+
 
     winning_image_label = tk.Label(
         result_window,
@@ -173,9 +190,15 @@ def show_results_window(result, stat):
     winning_image_label.image = winning_image
     winning_image_label.pack(pady=10)
 
+    if winning_card is None:
+        winning_stat_text = "No winning stat"
+    else:
+        winning_stat_text = f"{stat.title()}: {winning_card[stat]}"
+
+
     winning_value_label = tk.Label(
         result_window,
-        text=f"{stat.title()}: {winning_card[stat]}",
+        text=winning_stat_text,
         font=("Arial", 16, "bold"),
         bg="#1a1714",
         fg="#d4af37"
