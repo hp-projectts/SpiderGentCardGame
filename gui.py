@@ -122,7 +122,7 @@ def show_results_window(result, stat):
     result_window = tk.Toplevel(window)
 
     result_window.title("Battle Result")
-    result_window.geometry("1600x900")
+    result_window.geometry("1200x950")
     result_window.configure(bg="#1a1714")
 
     #This prevents player from clicking on main game when results window open
@@ -149,15 +149,6 @@ def show_results_window(result, stat):
     )    
     result_label.pack(pady=(20, 5))
 
-    stat_label = tk.Label(
-        result_window,
-        text=f"Battle stat: {stat.title()}",
-        font=("Arial", 14),
-        bg="#1a1714",
-        fg="white"
-    )
-    stat_label.pack(pady=(0, 10))
-
     if winning_card is None:
         winner_name = "DRAW"
     else:
@@ -171,6 +162,22 @@ def show_results_window(result, stat):
         fg="white"
     )
     winner_name_label.pack(pady=5)
+
+    
+    if winning_card is None:
+        winning_stat_text = "No winning stat"
+    else:
+        winning_stat_text = f"{stat.title()}: {winning_card[stat]}"
+
+
+    winning_value_label = tk.Label(
+        result_window,
+        text=winning_stat_text,
+        font=("Arial", 16, "bold"),
+        bg="#1a1714",
+        fg="#d4af37"
+    )
+    winning_value_label.pack(pady=20)
 
     if winning_card == None:
 
@@ -198,20 +205,6 @@ def show_results_window(result, stat):
     winning_image_label.image = winning_image
     winning_image_label.pack(pady=10)
 
-    if winning_card is None:
-        winning_stat_text = "No winning stat"
-    else:
-        winning_stat_text = f"{stat.title()}: {winning_card[stat]}"
-
-
-    winning_value_label = tk.Label(
-        result_window,
-        text=winning_stat_text,
-        font=("Arial", 16, "bold"),
-        bg="#1a1714",
-        fg="#d4af37"
-    )
-    winning_value_label.pack(pady=20)
 
     deal_button = tk.Button(
         result_window,
@@ -236,13 +229,13 @@ def show_results_window(result, stat):
 window = tk.Tk()
 
 window.title("Mr Arachnid & the Fiends of New Bristol: A Card Game")
-window.geometry("1600x900")
+window.geometry("1800x950")
 
 #CARDS CONTAINER
 
 cards_container = tk.Frame(window)
 cards_container.pack(
-    pady=20
+    pady=10
 )
 
 #Title label
@@ -260,8 +253,8 @@ player_card_frame = tk.Frame(
     bg="#e8e0d0",
     bd=3,
     relief="solid",
-    width=750,
-    height=700,
+    width=850,
+    height=800,
 )
 
 player_card_frame.pack(
@@ -325,7 +318,7 @@ card_name_label = tk.Label(
     )
 card_name_label.pack(
     anchor="n",
-    pady=(20, 80)
+    pady=(15, 50)
 )
 
 power_label = tk.Button(
@@ -383,8 +376,8 @@ computer_card_frame = tk.Frame(
     bg="#d3d3d3",
     bd=3,
     relief="solid",
-    width=750,
-    height=700,
+    width=850,
+    height=800,
 )
 
 computer_card_frame.pack(
@@ -453,7 +446,7 @@ computer_title_label = tk.Label(
 )
 computer_title_label.pack(
     anchor="n",
-    pady=(30, 120)
+    pady=(15, 50)
 )
 
 computer_power_label = tk.Label(
